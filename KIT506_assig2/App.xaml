@@ -1,0 +1,61 @@
+﻿<Application x:Class="RAP.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controller="clr-namespace:RAP.Controllers"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:model="clr-namespace:RAP.Models"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <!--<controller:ReseacherController x:Key="ReseacherController" />-->
+        <ObjectDataProvider x:Key="ResearcherProvider" IsAsynchronous="True" 
+             ObjectType="{x:Type controller:ReseacherController}"
+             MethodName="LoadReseacherDetails">
+            <ObjectDataProvider.MethodParameters>
+                <model:Researcher></model:Researcher>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider x:Key="ResearchersProvider" IsAsynchronous="True" 
+                             ObjectType="{x:Type controller:ReseacherController}"
+                            MethodName="LoadReseachers">
+            <ObjectDataProvider.MethodParameters>
+                <sys:String>All</sys:String>
+                <sys:String>*</sys:String>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider x:Key="CumulativeCountProvider" IsAsynchronous="True"
+             ObjectType="{x:Type controller:ReseacherController}"
+             MethodName="GetCumulativeCount">
+            <ObjectDataProvider.MethodParameters>
+                <model:Researcher></model:Researcher>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        
+        <ObjectDataProvider x:Key="StaffSupervisionsProvider" IsAsynchronous="True" 
+             ObjectType="{x:Type controller:ReseacherController}"
+             MethodName="GetStaffSupervisions">
+            <ObjectDataProvider.MethodParameters>
+                <model:Researcher></model:Researcher>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider x:Key="SelectedPublicationProvider" 
+                            IsAsynchronous="True"  
+                            ObjectType="{x:Type controller:PublicationsController}" 
+                            MethodName="GetDetail">
+            <ObjectDataProvider.MethodParameters>
+                <model:Publication></model:Publication>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider x:Key="StaffPerfProvider"
+                            IsAsynchronous="True"
+                            ObjectType="{x:Type controller:ReseacherController}"
+                            MethodName="GetPerformanceDesc">
+            
+        </ObjectDataProvider>
+        <model:Researcher x:Key="FocusedResearcher"></model:Researcher>
+        
+    </Application.Resources>
+</Application>

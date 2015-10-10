@@ -1,0 +1,80 @@
+﻿<UserControl 
+             Name="UCResearcherDetail"
+             x:Class="RAP.Views.ResearcherDetail"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d"
+             DataContext="{Binding Source={StaticResource ResearcherProvider}}" DataContextChanged="UCResearcherDetail_DataContextChanged"
+    >
+    <Grid Margin="0,0,0,0" MinHeight="450" MinWidth="400">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="450"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Image Height="156" Margin="0,0,0,0" VerticalAlignment="Top" Grid.Column="2" HorizontalAlignment="Right" Width="133" Source="{Binding Path=PhotoUrl}"/>
+            <Label Content="Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="53"/>
+            <Label Content="{Binding Path=Name}" VerticalAlignment="Top" Margin="53,0,0,0" Height="26" Grid.ColumnSpan="2"/>
+            <Label Content="Title:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="42" Margin="0,26,0,0"/>
+            <Label Content="{Binding Path=Title}" VerticalAlignment="Top" Margin="42,26,0,0" Height="26" Grid.ColumnSpan="2"/>
+            <Label Content="Unit:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="42" Margin="0,52,0,0"/>
+            <Label Content="{Binding Path=Unit}" VerticalAlignment="Top" Margin="42,52,0,0" Height="26" Grid.ColumnSpan="2"/>
+            <Label Content="Campus:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="53" Margin="0,78,0,0"/>
+            <Label Content="{Binding Path=Campus}" VerticalAlignment="Top" Margin="53,78,0,0" Height="26" Grid.ColumnSpan="2"/>
+            <Label Content="Email:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="42" Margin="0,104,0,0"/>
+            <Label Name="email" Content="{Binding Path=Email}" VerticalAlignment="Top" Margin="42,104,0,0" Height="26" Grid.ColumnSpan="2"/>
+            <Label Content="Current job:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="82" Margin="0,130,0,0"/>
+            <Label Content="{Binding Path=CurrentJobTitle}" VerticalAlignment="Top" Margin="82,130,0,0" Height="26" Grid.ColumnSpan="2"/>
+            <Label Content="Commenced with institution:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="171" Margin="0,156,0,0" Grid.ColumnSpan="2"/>
+            <Label Content="{Binding Path=CommencedWithInstitution}" VerticalAlignment="Top" Margin="38,156,0,0" Height="26" Grid.ColumnSpan="2" Grid.Column="1"/>
+            <Label Content="Commenced current position:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="171" Margin="0,182,0,0" Grid.ColumnSpan="2"/>
+            <Label Content="{Binding Path=CommencedCurrentPosition}" VerticalAlignment="Top" Margin="38,182,0,0" Grid.ColumnSpan="2" Grid.Column="1"/>
+            <Label Content="Previous positions:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="108" Margin="0,208,0,0"/>
+            <Button Content="CopyEmail" Grid.Column="1" HorizontalAlignment="Left" Margin="30,109,0,0" VerticalAlignment="Top" Width="76" Click="Button_Click"/>
+            <ListView Height="74" Margin="0,234,0,0" VerticalAlignment="Top" Grid.ColumnSpan="3" ItemsSource="{Binding Path=HistoricalPositions}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Start" DisplayMemberBinding="{Binding Path=GetStart}" />
+                        <GridViewColumn Header="End" DisplayMemberBinding="{Binding Path=GetEnd}"/>
+                        <GridViewColumn Header="Job Title" DisplayMemberBinding="{Binding Path=JobTitle}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Label Content="Tenure:" VerticalAlignment="Top" Margin="0,308,0,0" HorizontalAlignment="Left" Width="53"/>
+            <Label Content="{Binding Path=Tenure}" VerticalAlignment="Top" Margin="53,307,0,0" Height="26"/>
+            <Label Content="Publications:" VerticalAlignment="Top" Margin="0,308,0,0" Grid.Column="1" Height="25" HorizontalAlignment="Left" Width="77"/>
+            <Label Content="{Binding Path=PublicationCount}" VerticalAlignment="Top" Margin="77,307,0,0" Grid.Column="1" Height="26"/>
+            <Button Name="BtnCumCount" Content="Cumulative Count" Margin="14,313,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" Width="106" Grid.Column="2" Click="BtnCumCount_Click"/>
+            <Label Content="3-year average:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="91" Margin="0,333,0,0"/>
+            <Label Content="{Binding Path=GetThreeYearAvg}" VerticalAlignment="Top" Margin="91,333,0,0" Height="26"/>
+            <Label Content="Performance:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="79" Margin="0,333,0,0" Grid.Column="1"/>
+            <Label Content="{Binding Path=GetPerformance}" VerticalAlignment="Top" Margin="79,334,0,0" Grid.Column="1" Height="26"/>
+            <Label Content="Supervisions:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="82" Margin="0,359,0,0"/>
+            <Label Content="{Binding Path=SupervisionsCount}" VerticalAlignment="Top" Margin="82,359,0,0" Grid.ColumnSpan="2" Height="26"/>
+            <Button Name="BtnShowNames" Content="Show Names" Margin="17,360,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" Width="106" Grid.Column="2" Click="BtnShowNames_Click"/>
+            <Label Content="Degree:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="53" Margin="0,385,0,0"/>
+            <Label Content="{Binding Path=Degree}" VerticalAlignment="Top" Margin="53,385,0,0" Grid.Column="0" Height="26"/>
+            <Label Content="Supervisor:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="77" Margin="0,385,0,0" Grid.Column="1"/>
+            <Label Content="{Binding Path=Supervisor}" VerticalAlignment="Top" Margin="79,385,0,0" Grid.Column="1" Height="26" Grid.ColumnSpan="2"/>
+            <ComboBox Name="StartCombo" Margin="42,426,0,0" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="118" SelectionChanged="StartCombo_SelectionChanged"/>
+            <ComboBox Name="EndCombo" Margin="0,426,0,0" Grid.Column="2" HorizontalAlignment="Right" Width="118" SelectionChanged="EndCombo_SelectionChanged"/>
+            <Label Content="Start:" HorizontalAlignment="Left" Margin="0,426,0,0" VerticalAlignment="Top" Width="40"/>
+            <Label Content="End:" HorizontalAlignment="Right" Margin="0,426,118,0" Width="40" Grid.Column="1" Grid.ColumnSpan="2" />
+        </Grid>
+        <ListView Name="PubList" Margin="0,0,0,0" Grid.Row="1" ItemsSource="{Binding Path=GetPublications}" SelectionChanged="ListView_SelectionChanged" GridViewColumnHeader.Click ="Col_Click" DataContextChanged="PubList_DataContextChanged">
+            <ListView.View>
+                <GridView AllowsColumnReorder="True" >
+                    <GridViewColumn Header="Year↓" DisplayMemberBinding="{Binding Path=Year}" />
+                    <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Path=Title}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</UserControl>
